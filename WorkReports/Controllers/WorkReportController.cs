@@ -56,7 +56,7 @@ namespace WorkReports.Controllers
         public async Task<IActionResult> GetWorkReport(WorkReportDTO Model)
         {
             //IList<WorkReport> Result = await _unitOfWork.workReports.GetAll();
-            //return Json(Result);
+            //return Json(Result);sa
 
 
             var workReports = await _unitOfWork.workReports.GetAll();
