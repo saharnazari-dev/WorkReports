@@ -26,7 +26,7 @@ namespace WorkReports.Controllers
         public IActionResult Register() => View();
 
         [HttpPost]
-        public async Task<IActionResult> register(UserDTO model)
+        public async Task<IActionResult> register(RegisterDTO model)
         {
             if (ModelState.IsValid)
             {

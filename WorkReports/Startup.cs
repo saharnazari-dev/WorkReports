@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,12 +39,18 @@ namespace WorkReports
             options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"))
             );
 
-
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //               .AddCookie(options =>
+            //               {
+            //                   options.LoginPath = "/Account/Login";
+            //                   options.LogoutPath = "/Account/Logout";
+            //               }
+            //               );
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddAutoMapper(typeof(MapperInitializer));
             services.AddScoped<IUnitOfWork,UnitOfWork>();
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
             //services.ConfigureApplicationCookie(options => options.LoginPath = "/login");
         }
 
@@ -63,7 +70,7 @@ namespace WorkReports
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
