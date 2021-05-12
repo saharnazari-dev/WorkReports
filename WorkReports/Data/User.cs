@@ -12,6 +12,8 @@ namespace WorkReports.Data
         public string Family{ get; set; }
         public string Email { get; set; }
         public string Password{ get; set; }
+        public bool RememberMe { get; set; }
+        public string ConfirmPassword { get; set; }
 
         public virtual IList<WorkReport> WorkReports { get; set; }
        
