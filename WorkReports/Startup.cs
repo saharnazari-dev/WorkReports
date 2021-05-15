@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,17 +35,23 @@ namespace WorkReports
         public void ConfigureServices(IServiceCollection services)
         {
             /*data base setting*/
-            services.AddDbContext<DatabaseContext> (options =>
+            services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"))
             );
 
-
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //               .AddCookie(options =>
+            //               {
+            //                   options.LoginPath = "/Account/Login";
+            //                   options.LogoutPath = "/Account/Logout";
+            //               }
+            //               );
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
             services.AddControllersWithViews();
-
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddAutoMapper(typeof(MapperInitializer));
             services.AddScoped<IUnitOfWork,UnitOfWork>();
-            services.AddRazorPages().AddRazorRuntimeCompilation();
-
+            //services.ConfigureApplicationCookie(options => options.LoginPath = "/login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,16 +64,14 @@ namespace WorkReports
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
