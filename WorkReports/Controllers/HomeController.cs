@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 using WorkReports.Models;
 
 namespace WorkReports.Controllers
-{
-    
-    public class HomeController : Controller
+{ 
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -22,9 +21,10 @@ namespace WorkReports.Controllers
         
         public IActionResult Index()
         {
+            int userid = Userid;
             return View();
         }
-        [Authorize]
+    
         public IActionResult Privacy()
         {
             return View();
