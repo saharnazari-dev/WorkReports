@@ -72,14 +72,26 @@ namespace WorkReports.Controllers
             var users = await _unitOfWork.users.GetAll();
             var results = _mapper.Map<List<UserDTO>>(users);
             return Ok(results);
+
         }
 
+        [HttpPost]
+        public async Task<IActionResult> InsertReport1(PersonWorkDTO Model)
+        {
+            var personWorks = _mapper.Map<PersonWork>(Model);
+            await _unitOfWork.personWork.Insert(personWorks);
+            await _unitOfWork.Save();
+            return RedirectToAction("JobDone", "WorkReport");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> InsertReport(PersonWorkDTO Model)
         {
             var personWorks = _mapper.Map<PersonWork>(Model);
             await _unitOfWork.personWork.Insert(personWorks);
             await _unitOfWork.Save();
             return Json(personWorks.Id);
+            
         }
 
   

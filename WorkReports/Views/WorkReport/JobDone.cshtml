@@ -102,7 +102,7 @@
                         </div>
                         <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
                     </li>
-                    <div class="d-none d-sm-block topbar-divider"></div>
+                    @*<div class="d-none d-sm-block topbar-divider"></div>*@
                     <li class="nav-item dropdown no-arrow">
                         <div class="nav-item dropdown no-arrow">
                             <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
@@ -123,14 +123,14 @@
                 </div>
                 <div class="card-body">
                     <section class="contact-clean">
-                        <form method="post">
+                        <form method="post" action="/WorkReport/InsertReport">
                             <h2 class="text-center"></h2>
-                            <div class="form-group"><input class="form-control text-right" type="text" name="name" placeholder="تاریخ"></div>
-                            <div class="form-group"><input class="form-control text-right" type="text" name="name" placeholder="ساعت شروع"></div>
-                            <div class="form-group"><input class="form-control is-invalid text-right" type="email" name="email" placeholder="ساعت پایان" /></div>
-                            <div class="form-group"><input class="form-control text-right" type="text" name="name" placeholder="عنوان پروژه"></div>
-                            <div class="form-group"><textarea class="form-control text-right" name="message" placeholder="شرح فعالیت" rows="14"></textarea></div>
-                            <div class="form-group"><button class="btn btn-primary" type="submit">ارسال </button></div>
+                            <div class="form-group"><input class="form-control text-right" type="date" name="DoneDate" placeholder="تاریخ"></div>
+                            <div class="form-group"><input class="form-control text-right" type="time" name="StartHour" placeholder="ساعت شروع"></div>
+                            <div class="form-group"><input class="form-control is-invalid text-right" type="time" name="EndHour" placeholder="ساعت پایان" /></div>
+                            <div class="form-group"><input class="form-control text-right" type="text" name="Opration" placeholder="عنوان "></div>
+                            <div class="form-group"><textarea class="form-control text-right" name="Description" placeholder="شرح فعالیت" rows="14"></textarea></div>
+                            <div class="form-group"><button class="btn btn-primary" type="submit" @*onclick="InsertReport()"*@>ارسال </button></div>
                         </form>
                     </section>
                 </div>
@@ -145,30 +145,28 @@
 </div>
 <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 
-<script>
+@*<script>
 
 
-    function InsertReport {
+    function InsertReport() {
 
         var url = '/WorkReport/InsertReport';
         var model = {};
 
-        model.Title = $('#Description').val();
-        model.SortOrder = $('#SortOrder').val();
-        model.LanguageId = $('#LanguageId').val();
-        model.CategoryId = $('#CategoryId').val();
-        model.GalleryGuids = [];
-        model.ThumbnailGuid = $('#File_UploadId').val();
+        model.Opration = $('#description').val();
+        model.Description = $('#description').val();
+        model.DoneDate = $('#DoneDate').val();
+        model.StartHour = $('#StartHour').val();
+        model.EndHour = $('#EndHour').val();
 
-        if (model.Title == null || model.Title.trim().length == 0) {
-            toastr.warning('وارد کردن نام مقاله الزامیست!');
-            return false;
-        }
+        //if (model.Title == null || model.Title.trim().length == 0) {
+        //    toastr.warning('وارد کردن نام مقاله الزامیست!');
+        //    return false;
+        //}
 
-     
         $.post(url, { Model: model }, function (Result) {
 
-                toastOPSucc();
+            console.log('shod');
         });
     }
-</script>
+</script>*@

@@ -42,6 +42,7 @@ namespace WorkReports
 
             services.AddAutoMapper(typeof(MapperInitializer));
             services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
         }
 
