@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WorkReports.Data.PersonWork>
+
+@{
+    ViewData["Title"] = "GetPersonWork";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table" style="direction:rtl">
+    <thead>
+        <tr>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>*@
+
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoneDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartHour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndHour)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>*@
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoneDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartHour)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndHour)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

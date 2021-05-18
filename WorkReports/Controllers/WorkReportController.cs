@@ -26,14 +26,6 @@ namespace WorkReports.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult WorkReport()
-        {
-            return View();
-        }
-        //public IActionResult Login()
-        //{
-        //    return View();
-        //}
 
         public IActionResult JobDone()
         {
@@ -44,24 +36,20 @@ namespace WorkReports.Controllers
         {
             return View();
         }
-        public IActionResult PersonWork()
-        {
-            return View();
-        }
+
         public async Task<IActionResult> GetPersonWork(PersonWorkDTO Model)
         {
-            IList<PersonWork> Result = await _unitOfWork.personWork.GetAll();
-            return Json(Result);
+            var Result = await _unitOfWork.personWork.GetAll();
+            return View(Result);
         }
         public async Task<IActionResult> GetWorkReport(WorkReportDTO Model)
         {
-            //IList<WorkReport> Result = await _unitOfWork.workReports.GetAll();
-            //return Json(Result);
+            var Result = await _unitOfWork.workReports.GetAll();
+            return View(Result);
 
-
-            var workReports = await _unitOfWork.workReports.GetAll();
-            var results = _mapper.Map<List<WorkReportDTO>>(workReports);
-            return Ok(results);
+            //var workReports = await _unitOfWork.workReports.GetAll();
+            //var results = _mapper.Map<List<WorkReportDTO>>(workReports);
+            //return Ok(results);
         }
 
         public async Task<IActionResult> GetUser(/*UserDTO Model*/)
@@ -72,16 +60,28 @@ namespace WorkReports.Controllers
             var users = await _unitOfWork.users.GetAll();
             var results = _mapper.Map<List<UserDTO>>(users);
             return Ok(results);
+
         }
 
+        [HttpPost]
+        public async Task<IActionResult> InsertReport1(PersonWorkDTO Model)
+        {
+            var personWorks = _mapper.Map<PersonWork>(Model);
+            await _unitOfWork.personWork.Insert(personWorks);
+            await _unitOfWork.Save();
+            return RedirectToAction("JobDone", "WorkReport");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> InsertReport(PersonWorkDTO Model)
         {
             var personWorks = _mapper.Map<PersonWork>(Model);
             await _unitOfWork.personWork.Insert(personWorks);
             await _unitOfWork.Save();
             return Json(personWorks.Id);
+
         }
 
-  
+
     }
 }

@@ -17,6 +17,6 @@ namespace WorkReports.Configuration
             CreateMap<PersonWork, PersonWorkDTO>().ReverseMap();
 
         }
-       
+
     }
 }
