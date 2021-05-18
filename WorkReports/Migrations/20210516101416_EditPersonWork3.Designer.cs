@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkReports.Data;
 
 namespace WorkReports.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210516101416_EditPersonWork3")]
+    partial class EditPersonWork3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,11 +230,11 @@ namespace WorkReports.Migrations
                     b.Property<DateTime>("DoneDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndHour")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("EndHour")
+                        .HasColumnType("time");
 
-                    b.Property<DateTime>("StartHour")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("StartHour")
+                        .HasColumnType("time");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
