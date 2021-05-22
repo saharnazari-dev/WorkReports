@@ -1,6 +1,8 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@using WorkReports.Data;
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,9 +24,9 @@
 
     <div id="page-top">
         <div id="wrapper">
-            
 
-         
+
+
 
             <div class="d-flex flex-column" id="content-wrapper">
                 <div id="content">

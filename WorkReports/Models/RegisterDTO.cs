@@ -18,5 +18,9 @@ namespace WorkReports.Models
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Password and confirmation password not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string Name { get; set; }
+
+        public string Family { get; set; }
     }
 }

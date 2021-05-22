@@ -2,16 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 
 using System;
+using System.Reflection;
 
 namespace WorkReports.Data
 {
-    public class DatabaseContext : IdentityDbContext
+    public class DatabaseContext : IdentityDbContext<User>
     {
         private readonly DbContextOptions _options;
 
         public DatabaseContext(DbContextOptions options) : base(options) => _options = options;
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
             //builder.Entity<User>().HasData(
             //    new User

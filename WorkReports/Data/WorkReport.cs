@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace WorkReports.Data
         public DateTime LastWorkedDate { get; set; }
         public int? IsAccepted { get; set; }
 
-        [ForeignKey(nameof(User))]
+        [ForeignKey(nameof(IdentityUser))]
         public int UserId { get; set; }
         public User User{ get; set; }
     

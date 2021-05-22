@@ -46,7 +46,7 @@ namespace WorkReports
             //                   options.LogoutPath = "/Account/Logout";
             //               }
             //               );
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddAutoMapper(typeof(MapperInitializer));
